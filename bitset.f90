@@ -28,7 +28,7 @@ contains
 	end subroutine
 	
 	logical function btest_bitset(bs,idx) result(b)
-		type(bitset), intent(inout) :: bs
+		type(bitset), intent(in) :: bs
 		integer, intent(in) :: idx
 		integer :: i, j
 		i = idx
@@ -60,4 +60,21 @@ contains
 		j = i/bit_size(i) + 1
 		i = i - (j-1)*bit_size(i)
 	end subroutine
+	
+	integer function count_bitset(bs) result(c)
+		type(bitset) :: bs
+		integer :: i, j, k
+		i = 0
+		j = 0
+		c = 0
+		do k=1, bs%n
+			i = i + 1
+			if(i > bit_size(i)) then
+				j = j + 1
+			end if
+			if(btest(bs%set(j),i)) then
+				c = c + 1
+			end if
+		end do
+	end function
 end module

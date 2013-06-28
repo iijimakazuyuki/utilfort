@@ -10,6 +10,7 @@ contains
 		integer, intent(in) :: n
 		bs%n = n
 		allocate(bs%set(1+(n-1)/bit_size(n)))
+		bs%set = 0
 	end function
 	
 	subroutine print_bitset(bs)
@@ -42,7 +43,6 @@ contains
 		integer :: i, j
 		i = idx
 		call map_bitset(i,j)
-		print *, i, j
 		bs%set(j) = ibset(bs%set(j),i)
 	end subroutine
 	

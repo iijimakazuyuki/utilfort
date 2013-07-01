@@ -13,6 +13,26 @@ contains
 		bs%set = 0
 	end function
 	
+	function ieor_bitset(a,b) result(c)
+		type(bitset) :: c
+		type(bitset), intent(in) :: a, b
+		integer :: i, n
+		c = new_bitset(a%n)
+		do i=1, size(a%set)
+			c%set(i) = ieor(a%set(i), b%set(i))
+		end do
+	end function
+	
+	function iand_bitset(a,b) result(c)
+		type(bitset) :: c
+		type(bitset), intent(in) :: a, b
+		integer :: i, n
+		c = new_bitset(a%n)
+		do i=1, size(a%set)
+			c%set(i) = iand(a%set(i), b%set(i))
+		end do
+	end function
+	
 	subroutine print_bitset(bs)
 		type(bitset) :: bs
 		character(len=bs%n) :: a

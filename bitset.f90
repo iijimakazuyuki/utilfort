@@ -77,4 +77,32 @@ contains
 			end if
 		end do
 	end function
+	
+	integer function next_bitset(bs, i) result(n)
+		!todo binary search improvement
+		type(bitset), intent(in) :: bs
+		integer, intent(in) :: i
+		
+		integer :: j, k, sk, nbits, nsets
+		logical :: ok
+		
+		nbits = bit_size(i)
+		nsets = size(bs%set)
+		n = 0
+		do j=i/nbits+1, nsets
+			if(bs%set(j) /= 0) then
+				ok = .false.
+				sk = i-(j-1)*nbits
+				if(sk < 1) sk = 1
+				do k=sk, nbits
+					if(btest(bs%set(j),k)) then
+						n = (j-1)*nbits+k
+						ok = .true.
+						exit
+					end if
+				end do
+				if(ok) exit
+			end if
+		end do
+	end function
 end module

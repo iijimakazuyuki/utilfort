@@ -57,7 +57,7 @@ contains
 	
 	subroutine map_bitset(i,j)
 		integer, intent(inout) :: i, j
-		j = i/bit_size(i) + 1
+		j = (i-1)/bit_size(i) + 1
 		i = i - (j-1)*bit_size(i)
 	end subroutine
 	

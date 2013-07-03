@@ -125,4 +125,11 @@ contains
 			end if
 		end do
 	end function
+	
+	function copy_bitset(bs) result(copy)
+		type(bitset) :: copy
+		type(bitset), intent(in) :: bs
+		copy = new_bitset(bs%n)
+		copy%set = bs%set
+	end function
 end module

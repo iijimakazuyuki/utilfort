@@ -82,15 +82,16 @@ contains
 	end subroutine
 	
 	integer function count_bitset(bs) result(c)
-		type(bitset) :: bs
+		type(bitset), intent(in) :: bs
 		integer :: i, j, k
 		i = 0
-		j = 0
+		j = 1
 		c = 0
 		do k=1, bs%n
 			i = i + 1
 			if(i > bit_size(i)) then
 				j = j + 1
+				i = 1
 			end if
 			if(btest(bs%set(j),i)) then
 				c = c + 1

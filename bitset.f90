@@ -23,6 +23,16 @@ contains
 		end do
 	end function
 	
+	function ior_bitset(a,b) result(c)
+		type(bitset) :: c
+		type(bitset), intent(in) :: a, b
+		integer :: i
+		c = new_bitset(a%n)
+		do i=1, size(a%set)
+			c%set(i) = ior(a%set(i), b%set(i))
+		end do
+	end function
+	
 	function iand_bitset(a,b) result(c)
 		type(bitset) :: c
 		type(bitset), intent(in) :: a, b

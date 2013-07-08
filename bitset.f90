@@ -111,17 +111,18 @@ contains
 		end do
 	end function
 	
-	integer function next_bitset(bs, i) result(n)
+	integer function next_bitset(bs, si) result(n)
 		!todo binary search improvement
 		type(bitset), intent(in) :: bs
-		integer, intent(in) :: i
+		integer, intent(in) :: si
 		
-		integer :: j, k, sk, nbits, nsets
+		integer :: i, j, k, sk, nbits, nsets
 		logical :: ok
 		
 		nbits = bit_size(i)
 		nsets = size(bs%set)
 		n = 0
+		i = si + 1
 		do j=i/nbits+1, nsets
 			if(bs%set(j) /= 0) then
 				ok = .false.

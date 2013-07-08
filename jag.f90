@@ -40,4 +40,30 @@ contains
 			if(si <= ei) print *, a%val(si:ei)
 		end do
 	end subroutine
+	
+	function composite_jag(a, b) result(c)
+		type(jag_i) :: c
+		type(jag_i), intent(in) :: a, b
+		integer :: i, j, k, si, ei
+		c%n = a%n
+		c%m = a%m + b%m
+		allocate(c%idx(0:c%n), c%val(c%m))
+		c%idx = a%idx + b%idx
+		do i=1, a%n
+			si = a%idx(i-1)+1
+			ei = a%idx(i)
+			j = c%idx(i-1)+1
+			k = ei - si + j
+			if(si <= ei) then
+				c%val(j:k) = a%val(si:ei)
+			end if
+			si = b%idx(i-1)+1
+			ei = b%idx(i)
+			j = k + 1
+			k = ei - si + j
+			if(si <= ei) then
+				c%val(j:k) = b%val(si:ei)
+			end if
+		end do
+	end function
 end module

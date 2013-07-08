@@ -16,7 +16,7 @@ contains
 	function ieor_bitset(a,b) result(c)
 		type(bitset) :: c
 		type(bitset), intent(in) :: a, b
-		integer :: i, n
+		integer :: i
 		c = new_bitset(a%n)
 		do i=1, size(a%set)
 			c%set(i) = ieor(a%set(i), b%set(i))
@@ -26,10 +26,22 @@ contains
 	function iand_bitset(a,b) result(c)
 		type(bitset) :: c
 		type(bitset), intent(in) :: a, b
-		integer :: i, n
+		integer :: i
 		c = new_bitset(a%n)
 		do i=1, size(a%set)
 			c%set(i) = iand(a%set(i), b%set(i))
+		end do
+	end function
+	
+	logical function equal_bitset(a,b) result(c)
+		type(bitset), intent(in) :: a, b
+		integer :: i
+		c = .true.
+		do i=1, size(a%set)
+			if(a%set(i) /= b%set(i)) then
+				c = .false.
+				exit
+			end if
 		end do
 	end function
 	

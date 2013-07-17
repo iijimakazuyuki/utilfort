@@ -66,4 +66,10 @@ contains
 			end if
 		end do
 	end function
+	
+	integer function size_jag(a,i) result(s)
+		type(jag_i), intent(in) :: a
+		integer, intent(in) :: i
+		s = a%idx(i) - a%idx(i-1)
+	end function
 end module

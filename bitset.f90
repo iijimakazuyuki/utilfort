@@ -133,7 +133,7 @@ contains
 		nsets = size(bs%set)
 		n = 0
 		i = si + 1
-		do j=i/nbits+1, nsets
+		do j=(i-1)/nbits+1, nsets
 			if(bs%set(j) /= 0) then
 				ok = .false.
 				sk = i-(j-1)*nbits
@@ -156,4 +156,17 @@ contains
 		copy = new_bitset(bs%n)
 		copy%set = bs%set
 	end function
+	
+	subroutine assign_bitset_array(a,i,b)
+		integer, intent(inout) :: a(:), i
+		type(bitset), intent(in) :: b
+		integer :: j
+		j = 0
+		do
+			j = next_bitset(b,j)
+			if(j == 0) exit
+			i = i + 1
+			a(i) = j
+		end do
+	end subroutine
 end module

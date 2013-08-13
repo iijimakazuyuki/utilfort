@@ -169,4 +169,26 @@ contains
 			a(i) = j
 		end do
 	end subroutine
+	
+	subroutine print_bitset_list(bs)
+		type(bitset), intent(in) :: bs
+		integer :: i
+		i = 0
+		print *, count_bitset(bs)
+		do
+			i = next_bitset(bs,i)
+			if(i == 0) exit
+			print *, i
+		end do
+	end subroutine
+	
+	subroutine read_bitset_list(bs)
+		type(bitset), intent(inout) :: bs
+		integer :: c, i, j
+		read *, c
+		do i=1, c
+			read *, j
+			call set_bitset(bs, j)
+		end do
+	end subroutine
 end module

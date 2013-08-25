@@ -191,4 +191,15 @@ contains
 			call set_bitset(bs, j)
 		end do
 	end subroutine
+	
+	subroutine read_file_bitset_list(n,bs)
+		type(bitset), intent(inout) :: bs
+		integer, intent(in) :: n
+		integer :: c, i, j
+		read(n,*) c
+		do i=1, c
+			read(n,*) j
+			call set_bitset(bs, j)
+		end do
+	end subroutine
 end module
